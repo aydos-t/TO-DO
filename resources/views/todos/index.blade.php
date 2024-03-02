@@ -2,13 +2,12 @@
 
 @section('styles')
     <style>
-        #outer
-        {
+        #outer {
             width: auto;
             text-align: center;
         }
-        .inner
-        {
+
+        .inner {
             display: inline-block;
         }
     </style>
@@ -21,13 +20,19 @@
                 <div class="card">
                     <div class="card-header">{{ __('Список задач') }}</div>
 
-                    @if(\Illuminate\Support\Facades\Session::has('alert-success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ \Illuminate\Support\Facades\Session::get('alert-success') }}
-                        </div>
-                    @endif
-
                     <div class="card-body">
+                        @if(\Illuminate\Support\Facades\Session::has('alert-success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ \Illuminate\Support\Facades\Session::get('alert-success') }}
+                            </div>
+                        @endif
+
+                        @if(\Illuminate\Support\Facades\Session::has('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ \Illuminate\Support\Facades\Session::get('error') }}
+                            </div>
+                        @endif
+
                         @if(isset($todos) > 0)
                             <table class="table">
                                 <thead>
@@ -51,7 +56,8 @@
                                             @endif
                                         </td>
                                         <td id="outer">
-                                            <a class="inner btn btn-sm btn-success" href="">Подробнее</a>
+                                            <a class="inner btn btn-sm btn-success"
+                                               href="{{ route('todos.show', $todo->id) }}">Подробнее</a>
                                             <a class="inner btn btn-sm btn-info" href="">Изменить</a>
                                             <form class="d-inline-block" action="">
                                                 <input type="hidden" name="todo_id" value="{{ $todo->id }}">
