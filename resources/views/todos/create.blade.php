@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('TO-DO Создать') }}</div>
+                    <div class="card-header">{{ __('Создание задачи') }}</div>
 
                     <div class="card-body">
                         <form>
