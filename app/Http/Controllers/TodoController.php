@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
+use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
@@ -70,6 +71,21 @@ class TodoController extends Controller
             'is_completed' => $request->is_completed,
         ]);
         request()->session()->flash('alert-info', 'ЗАДАЧА УСПЕШНО ОБНОВЛЕНА.');
+        return to_route('todos.index');
+    }
+
+    public function destroy(Request $request)
+    {
+        $todo = Todo ::find($request->todo_id);
+        if (! $todo) {
+            request()->session()->flash('error', 'Не получается вывести подробные данные данной задачи.');
+            return to_route('todos.index') -> withErrors([
+                'error' => 'Не получается вывести подробные данные данной задачи.'
+            ]);
+        }
+
+        $todo->delete();
+        request()->session()->flash('alert-success', 'ЗАДАЧА УСПЕШНО УДАЛЕНО.');
         return to_route('todos.index');
     }
 }

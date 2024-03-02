@@ -27,17 +27,19 @@
                             </div>
                         @endif
 
-                            @if(\Illuminate\Support\Facades\Session::has('alert-info'))
-                                <div class="alert alert-info" role="alert">
-                                    {{ \Illuminate\Support\Facades\Session::get('alert-info') }}
-                                </div>
-                            @endif
+                        @if(\Illuminate\Support\Facades\Session::has('alert-info'))
+                            <div class="alert alert-info" role="alert">
+                                {{ \Illuminate\Support\Facades\Session::get('alert-info') }}
+                            </div>
+                        @endif
 
                         @if(\Illuminate\Support\Facades\Session::has('error'))
                             <div class="alert alert-danger" role="alert">
                                 {{ \Illuminate\Support\Facades\Session::get('error') }}
                             </div>
                         @endif
+
+                        <a href="{{ route('todos.create') }}" class="btn btn-sm btn-info mb-3">Добавить задачу</a>
 
                         @if(isset($todos) > 0)
                             <table class="table">
@@ -68,7 +70,10 @@
                                             <a class="inner btn btn-sm btn-info"
                                                href="{{ route('todos.edit', $todo->id) }}">Изменить
                                             </a>
-                                            <form class="d-inline-block" action="">
+                                            <form class="inner d-inline-block" action="{{ route('todos.destroy') }}"
+                                                  method="POST">
+                                                @csrf
+                                                @method('DELETE')
                                                 <input type="hidden" name="todo_id" value="{{ $todo->id }}">
                                                 <input type="submit" class="btn btn-sm btn-danger" value="Удалить">
                                             </form>
