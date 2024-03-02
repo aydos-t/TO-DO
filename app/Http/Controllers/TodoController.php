@@ -27,6 +27,18 @@ class TodoController extends Controller
         ]);
 
         $request->session()->flash('alert-success', 'СПИСОК ЗАДАЧ СОЗДАНА УСПЕШНО!');
-        return view('todos.index');
+        return to_route('todos.index');
+    }
+
+    public function show($id)
+    {
+        $todo = Todo ::find($id);
+            if (! $todo) {
+                request()->session()->flash('error', 'Не получается вывести подробные данные данной задачи.');
+                return to_route('todos.index') -> withErrors([
+                    'error' => 'Не получается вывести подробные данные данной задачи.'
+                ]);
+            }
+            return view('todos.show', ['todo' => $todo]);
     }
 }
