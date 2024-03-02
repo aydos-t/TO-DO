@@ -8,7 +8,18 @@
                     <div class="card-header">{{ __('Создание задачи') }}</div>
 
                     <div class="card-body">
-                        <form>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form action="{{ route('todos.store') }}" method="POST">
+                        @csrf
                             <div class="mb-3">
                                 <label class="form-label">Заголовок</label>
                                 <input type="text" name="title" class="form-control">
