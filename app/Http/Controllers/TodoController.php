@@ -27,7 +27,7 @@ class TodoController extends Controller
             'is_completed' => 0
         ]);
 
-        $request->session()->flash('alert-success', 'СПИСОК ЗАДАЧ СОЗДАНА УСПЕШНО!');
+        $request->session()->flash('alert-success', 'НОВАЯ ЗАДАЧА ДОБАВЛЕНО УСПЕШНО!');
         return to_route('todos.index');
     }
 
@@ -47,9 +47,9 @@ class TodoController extends Controller
     {
         $todo = Todo ::find($id);
         if (! $todo) {
-            request()->session()->flash('error', 'Не получается вывести подробные данные данной задачи.');
+            request()->session()->flash('error', 'Не получается вывести данные данной задачи.');
             return to_route('todos.index') -> withErrors([
-                'error' => 'Не получается вывести подробные данные данной задачи.'
+                'error' => 'Не получается вывести данные данной задачи.'
             ]);
         }
         return view('todos.edit', ['todo' => $todo]);
@@ -59,9 +59,9 @@ class TodoController extends Controller
     {
         $todo = Todo ::find($request->todo_id);
         if (! $todo) {
-            request()->session()->flash('error', 'Не получается вывести подробные данные данной задачи.');
+            request()->session()->flash('error', 'Не получается вывести данные данной задачи.');
             return to_route('todos.index') -> withErrors([
-                'error' => 'Не получается вывести подробные данные данной задачи.'
+                'error' => 'Не получается вывести данные данной задачи.'
             ]);
         }
 
@@ -78,9 +78,9 @@ class TodoController extends Controller
     {
         $todo = Todo ::find($request->todo_id);
         if (! $todo) {
-            request()->session()->flash('error', 'Не получается вывести подробные данные данной задачи.');
+            request()->session()->flash('error', 'Не получается получить данные данной задачи.');
             return to_route('todos.index') -> withErrors([
-                'error' => 'Не получается вывести подробные данные данной задачи.'
+                'error' => 'Не получается получить данные данной задачи.'
             ]);
         }
 

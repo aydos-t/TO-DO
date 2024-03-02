@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Создание задачи') }}</div>
+                    <div class="card-header">{{ __('Изменить задачу') }}</div>
 
                     <div class="card-body">
                         <form action="{{ route('todos.update') }}" method="POST">
