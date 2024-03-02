@@ -27,6 +27,12 @@
                             </div>
                         @endif
 
+                            @if(\Illuminate\Support\Facades\Session::has('alert-info'))
+                                <div class="alert alert-info" role="alert">
+                                    {{ \Illuminate\Support\Facades\Session::get('alert-info') }}
+                                </div>
+                            @endif
+
                         @if(\Illuminate\Support\Facades\Session::has('error'))
                             <div class="alert alert-danger" role="alert">
                                 {{ \Illuminate\Support\Facades\Session::get('error') }}
@@ -57,8 +63,11 @@
                                         </td>
                                         <td id="outer">
                                             <a class="inner btn btn-sm btn-success"
-                                               href="{{ route('todos.show', $todo->id) }}">Подробнее</a>
-                                            <a class="inner btn btn-sm btn-info" href="">Изменить</a>
+                                               href="{{ route('todos.show', $todo->id) }}">Подробнее
+                                            </a>
+                                            <a class="inner btn btn-sm btn-info"
+                                               href="{{ route('todos.edit', $todo->id) }}">Изменить
+                                            </a>
                                             <form class="d-inline-block" action="">
                                                 <input type="hidden" name="todo_id" value="{{ $todo->id }}">
                                                 <input type="submit" class="btn btn-sm btn-danger" value="Удалить">
