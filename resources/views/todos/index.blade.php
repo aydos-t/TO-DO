@@ -28,7 +28,7 @@
                     @endif
 
                     <div class="card-body">
-                        @if(count($todos) > 0)
+                        @if(isset($todos) > 0)
                             <table class="table">
                                 <thead>
                                 <tr>
